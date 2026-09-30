@@ -1,0 +1,58 @@
+{
+  "references": [
+    {
+      "id": "R01",
+      "url": "https://uibowl.io/screens/1001",
+      "screen_type": "weekly",
+      "reason": "weekly 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R02",
+      "url": "https://uibowl.io/screens/1002",
+      "screen_type": "weekly",
+      "reason": "weekly 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R03",
+      "url": "https://uibowl.io/screens/1003",
+      "screen_type": "weekly",
+      "reason": "weekly 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R04",
+      "url": "https://uibowl.io/screens/1004",
+      "screen_type": "weekly",
+      "reason": "weekly 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R05",
+      "url": "https://uibowl.io/screens/1005",
+      "screen_type": "monthly",
+      "reason": "monthly 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R06",
+      "url": "https://uibowl.io/screens/1006",
+      "screen_type": "monthly",
+      "reason": "monthly 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R07",
+      "url": "https://uibowl.io/screens/1007",
+      "screen_type": "monthly",
+      "reason": "monthly 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R08",
+      "url": "https://uibowl.io/screens/1008",
+      "screen_type": "task-tree",
+      "reason": "task-tree 화면의 정보 배치 참고"
+    },
+    {
+      "id": "R09",
+      "url": "https://uibowl.io/screens/1009",
+      "screen_type": "task-tree",
+      "reason": "task-tree 화면의 정보 배치 참고"
+    }
+  ]
+}

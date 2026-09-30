@@ -1,0 +1,6 @@
+{
+  "suite": "gate2",
+  "violated": [
+    "G2-04"
+  ]
+}

@@ -1,0 +1,102 @@
+# 규칙 SSOT. 모든 숫자 규칙은 이 파일에만 적는다.
+# 토큰 허용값은 복사하지 않고 tokens.source에서 실행 때마다 읽는다.
+# ★ = story-service.md "어기면 안 되는 것" 위반 시 걸리는 조건
+version: 1
+updated: 2026-09-30
+
+tokens:
+  source: docs/design.md          # 앞머리(front matter)
+  radius_from: rounded
+  spacing_from: spacing
+  font_size_from: typography.*.fontSize
+  colors_from: colors
+
+run:
+  screens_allowed: [weekly, monthly, goal-edit, task-tree]
+  screens_min: 1
+  screens_max: 4
+  variants: [A, B]
+  max_consecutive_fail: 3         # 같은 지점 연속 실패 시 중단하고 본인에게 넘김
+
+# 게이트 1: 레퍼런스 분석 → 화면 설계. 실패 시 1단계로.
+gate1:
+  G1-01: { desc: 레퍼런스 개수, references_exact: 10 }
+  G1-02: { desc: 출처와 중복, url_domain: uibowl.io, duplicate_url_max: 0 }
+  G1-03: { desc: 화면 유형별 최소 개수, per_screen_type_min: 2 }
+  G1-04: { desc: 선택 이유, empty_reason_max: 0 }
+  G1-05:
+    desc: 표현 방식 비교표
+    methods_exact: 4
+    methods: [주간 7일 배치, 오늘 할 일 강조, 태스크 단위 보기, 월간 보기]
+    pros_min: 1
+    cons_min: 1
+    evidence_refs_min: 1
+  G1-06: { desc: Figma 레퍼런스 프레임, figma_page: 01_Reference, frames_exact: 10 }
+
+# 게이트 2: 화면 설계 → 디자인 제작. 실패 시 2단계로. 비교표가 원인이면 1단계로.
+gate2:
+  G2-01:
+    desc: A안·B안 배치 방식 차이
+    layout:
+      A: 7일 열 배치
+      B: 하루 상세 + 주간 요약
+    must_differ: true
+  G2-02: { desc: 화면 포함, include_all_input_screens: true, required_screens: [task-tree], task_tree_levels: 3 }
+  G2-03: { desc: 주간 화면 1순위, screen: weekly, priority_1: 오늘의 미완료 할 일 }
+  G2-04:
+    desc: 계층 용어
+    allowed_terms: [목표 영역, 월 목표, 주차별 목표, 일간 할 일, 태스크]
+    forbidden_terms: [프로젝트, 에픽, 서브태스크, 하위 목표, 분기 목표, 연간 목표]
+    other_hierarchy_terms_max: 0
+  G2-05:   # ★ 실적 중복 금지
+    desc: 계산 근거 일치
+    metric_fields: [진행률, 완료량, 남은 양]
+    source_id_required: true
+    same_metric_same_source_across: [weekly, monthly]
+    adjacent_month_label_required: true
+  G2-06:   # ★ 삭제 시 할 일 보존
+    desc: 삭제 영향 안내
+    delete_confirm_fields: [affected_tasks_count, 미연결로 보존]
+    unlinked_label_screens_min: 1
+
+# 디자인 제작 완료 조건(가이드 검토). 두 시안 모두 위반 0개. 실패 시 3단계 안에서 수정.
+guide:
+  violations_max: 0
+  D-01: { desc: 토큰 값, radius: tokens, spacing: tokens, font_size: tokens }
+  D-02: { desc: 기본 색, non_category_colors: tokens }
+  D-03:
+    desc: 분류색
+    max_count: 8
+    min_hue_gap_deg: 30
+    hsl_saturation_max: 70
+    hsl_lightness_min: 45
+    hsl_lightness_max: 70
+  D-04: { desc: 분류색 면적, max_node_height_px: 24, max_area_ratio: 0.10 }
+  D-05: { desc: 명암비, min_contrast: 4.5 }
+  D-06: { desc: 완료 표시, completed_color: "#8a8f98", applies_to: [text, checkbox] }
+  D-07:
+    desc: 라벤더 전용
+    colors: ["#5e6ad2", "#828fff", "#5e69d1"]
+    allowed_node_name_contains: [button, focus]
+  D-08:    # ★ 삭제 시 할 일 보존
+    desc: 삭제 문구 금지어
+    forbidden_phrases: [할 일도 삭제, 함께 삭제]
+    max: 0
+
+# 사람 승인 지점(1곳): 가이드 검토 통과 후 본인이 A/B 중 1안 컨펌.
+approval:
+  after: guide
+  by: 본인
+  choose_one_of: [A, B]
+  record: [state.json:approved_variant, figma:00_Gate Log]
+
+# 편집 범위. 훅(.claude/hooks/scope_guard.py)과 check_scope.py가 읽는다.
+# 경로는 harness/runs/<실행ID>/ 기준. main = 오케스트레이터(메인 세션).
+scope:
+  ref-collector:  [01-ref-collect/]
+  ref-analyst:    [02-ref-analysis/]
+  screen-planner: [03-spec/]
+  designer:       [04-design/]
+  guide-reviewer: [05-guide-review/]
+  gate-judge:     []
+  main:           [input.json, state.json]

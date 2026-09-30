@@ -1,0 +1,14 @@
+{
+  "prd_version": "fixture",
+  "screens": [
+    "weekly",
+    "monthly"
+  ],
+  "figma_file_key": "FIXTURE",
+  "pages": {
+    "00_Gate Log": "0:1",
+    "01_Reference": "0:2",
+    "02_Screen Spec": "0:3",
+    "03_Design": "0:4"
+  }
+}

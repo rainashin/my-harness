@@ -1,0 +1,158 @@
+{
+  "variant": "A",
+  "frames": [
+    {
+      "id": "1:1",
+      "name": "weekly",
+      "width": 1440,
+      "height": 1024
+    }
+  ],
+  "nodes": [
+    {
+      "id": "1:1",
+      "name": "weekly",
+      "type": "FRAME",
+      "frame": "1:1",
+      "width": 1440,
+      "height": 1024,
+      "fills": [
+        "#010102"
+      ]
+    },
+    {
+      "id": "1:2",
+      "name": "card/today",
+      "type": "FRAME",
+      "frame": "1:1",
+      "width": 600,
+      "height": 400,
+      "fills": [
+        "#0f1011"
+      ],
+      "strokes": [
+        "#23252a"
+      ],
+      "cornerRadius": 10,
+      "padding": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "itemSpacing": 16
+    },
+    {
+      "id": "1:3",
+      "name": "title",
+      "type": "TEXT",
+      "frame": "1:1",
+      "width": 200,
+      "height": 28,
+      "textColor": "#f7f8f8",
+      "bg": "#0f1011",
+      "fontSize": 22,
+      "characters": "오늘 할 일"
+    },
+    {
+      "id": "1:4",
+      "name": "task",
+      "type": "TEXT",
+      "frame": "1:1",
+      "width": 300,
+      "height": 20,
+      "textColor": "#f7f8f8",
+      "bg": "#0f1011",
+      "fontSize": 14,
+      "characters": "스레드 1개 작성"
+    },
+    {
+      "id": "1:5",
+      "name": "task-completed",
+      "type": "TEXT",
+      "frame": "1:1",
+      "width": 300,
+      "height": 20,
+      "textColor": "#8a8f98",
+      "bg": "#0f1011",
+      "fontSize": 14,
+      "characters": "주제 3개 선정"
+    },
+    {
+      "id": "1:6",
+      "name": "checkbox-completed",
+      "type": "RECTANGLE",
+      "frame": "1:1",
+      "width": 16,
+      "height": 16,
+      "fills": [
+        "#8a8f98"
+      ],
+      "cornerRadius": 4
+    },
+    {
+      "id": "1:7",
+      "name": "cat/sns",
+      "type": "ELLIPSE",
+      "frame": "1:1",
+      "width": 8,
+      "height": 8,
+      "fills": [
+        "#4d8ccb"
+      ]
+    },
+    {
+      "id": "1:8",
+      "name": "cat/study",
+      "type": "ELLIPSE",
+      "frame": "1:1",
+      "width": 8,
+      "height": 8,
+      "fills": [
+        "#cb8c4d"
+      ]
+    },
+    {
+      "id": "1:9",
+      "name": "button-primary",
+      "type": "FRAME",
+      "frame": "1:1",
+      "width": 96,
+      "height": 32,
+      "fills": [
+        "#5e6ad2"
+      ],
+      "cornerRadius": 8,
+      "padding": [
+        8,
+        14,
+        8,
+        14
+      ]
+    },
+    {
+      "id": "1:10",
+      "name": "button-primary/label",
+      "type": "TEXT",
+      "frame": "1:1",
+      "width": 60,
+      "height": 17,
+      "textColor": "#ffffff",
+      "bg": "#5e6ad2",
+      "fontSize": 14,
+      "characters": "할 일 추가"
+    },
+    {
+      "id": "1:11",
+      "name": "delete-confirm",
+      "type": "TEXT",
+      "frame": "1:1",
+      "width": 360,
+      "height": 20,
+      "textColor": "#d0d6e0",
+      "bg": "#141516",
+      "fontSize": 14,
+      "characters": "목표를 삭제해도 할 일 3개는 미연결로 보존돼요"
+    }
+  ]
+}
